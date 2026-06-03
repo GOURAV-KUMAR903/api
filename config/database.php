@@ -2,7 +2,8 @@
 
 class Database {
 
-    private $host = "185.27.134.144";
+    private $host = "185.27.134.144"; // IP use kiya hai
+    private $port = "3306";
     private $db_name = "if0_42037353_test";
     private $username = "if0_42037353";
     private $password = "52qc9KU46EPNRl1";
@@ -15,20 +16,27 @@ class Database {
 
         try {
 
+            $dsn = "mysql:host={$this->host};port={$this->port};dbname={$this->db_name}";
+
             $this->conn = new PDO(
-                "mysql:host=".$this->host.";dbname=".$this->db_name,
+                $dsn,
                 $this->username,
                 $this->password
             );
 
-            $this->conn->setAttribute(
-                PDO::ATTR_ERRMODE,
-                PDO::ERRMODE_EXCEPTION
-            );
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         } catch(PDOException $e) {
 
-            echo "Connection Error: ".$e->getMessage();
+            http_response_code(500);
+
+            echo json_encode([
+                "status" => false,
+                "error" => "Connection Error",
+                "message" => $e->getMessage()
+            ]);
+
+            exit;
         }
 
         return $this->conn;
