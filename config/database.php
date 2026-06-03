@@ -2,7 +2,7 @@
 
 class Database {
 
-    private $host = "sql308.infinityfree.com";
+    private $host = "185.27.134.144";
     private $db_name = "if0_42037353_test";
     private $username = "if0_42037353";
     private $password = "52qc9KU46EPNRl1";
