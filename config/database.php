@@ -2,7 +2,7 @@
 
 class Database {
 
-    private $host = "localhost";
+    private $host = "159.89.36.188";
     private $port = "3306";
     private $db_name = "gnitaskm_test";
     private $username = "gnitaskm";
