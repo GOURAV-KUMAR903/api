@@ -2,11 +2,11 @@
 
 class Database {
 
-    private $host = "185.27.134.144"; // IP use kiya hai
+    private $host = "localhost";
     private $port = "3306";
-    private $db_name = "if0_42037353_test";
-    private $username = "if0_42037353";
-    private $password = "52qc9KU46EPNRl1";
+    private $db_name = "gnitaskm_test";
+    private $username = "gnitaskm";
+    private $password = "0@cK%Ub#M8!W";
 
     public $conn;
 
@@ -16,7 +16,7 @@ class Database {
 
         try {
 
-            $dsn = "mysql:host={$this->host};port={$this->port};dbname={$this->db_name}";
+            $dsn = "mysql:host={$this->host};port={$this->port};dbname={$this->db_name};charset=utf8";
 
             $this->conn = new PDO(
                 $dsn,
@@ -27,16 +27,7 @@ class Database {
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         } catch(PDOException $e) {
-
-            http_response_code(500);
-
-            echo json_encode([
-                "status" => false,
-                "error" => "Connection Error",
-                "message" => $e->getMessage()
-            ]);
-
-            exit;
+            die("Connection Error: " . $e->getMessage());
         }
 
         return $this->conn;
